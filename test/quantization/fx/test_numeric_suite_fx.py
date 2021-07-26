@@ -419,8 +419,8 @@ class TestFXGraphMatcher(QuantizationTestCase):
 
         expected_types = {
             cat_name_0: ((torch.cat, torch.cat), (torch.cat, torch.cat)),
-            add_name_0: ((torch.add, torch.add), (toq.add, toq.add)),
-            add_name_1: ((torch.add, torch.add), (toq.add, toq.add)),
+            add_name_0: ((torch.add, torch.quantization.MinMaxObserver), (toq.add, toq.add)),
+            add_name_1: ((torch.add, torch.quantization.MinMaxObserver), (toq.add, toq.add)),
         }
         self.assert_types_for_matched_subgraph_pairs(results, expected_types, mp, mq)
 
@@ -453,9 +453,9 @@ class TestFXGraphMatcher(QuantizationTestCase):
             base_name_to_sets_of_related_ops, torch.add) + '_2'
 
         expected_types = {
-            add_name_0: ((torch.add, torch.add), (toq.add, toq.add)),
-            add_name_1: ((torch.add, torch.add), (toq.add, toq.add)),
-            add_name_2: ((torch.add, torch.add), (toq.add, toq.add)),
+            add_name_0: ((torch.add, torch.quantization.MinMaxObserver), (toq.add, toq.add)),
+            add_name_1: ((torch.add, torch.quantization.MinMaxObserver), (toq.add, toq.add)),
+            add_name_2: ((torch.add, torch.quantization.MinMaxObserver), (toq.add, toq.add)),
         }
         self.assert_types_for_matched_subgraph_pairs(results, expected_types, mp, mq)
 
